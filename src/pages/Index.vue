@@ -13,7 +13,7 @@
 
   <v-row class="justify-space-around">
 <v-card
-v-for= "edge in $page.nooks.edges" :key = "edge.node.id"
+v-for= "edge in nooks" :key = "edge.node.id"
     width="300"
     class="mt-5"
   >
@@ -57,6 +57,7 @@ query{
         id,
         Name,
         Description,
+        Categories
       
         
         
@@ -78,33 +79,41 @@ export default {
 data() {
     return {
       tab: 0,
-      Nooks : []
+      nooks: []
       
     }
 },
 mounted(){
-
-  this.Nooks = this.$page.Nooks.edges
+  this.nooks = this.$page.nooks.edges
 },
 watch: {
     tab(val) {
       if (this.tab === 0) {
-        this.showAllEvents()
+        this.showAllNook()
       } else {
-        this.showEventsByType(val)
+        this.showNookByType(val)
       }
     }
   },
   methods: {
-    showAllEvents() {
-      this.Nooks = this.$page.Nooks.edges
-      console.log('all')
-    },
-    showEventsByType(val) {
-      this.Nooks = this.$page.Nooks.edges.filter((edge) => {
-        return edge.node.category  === val
+    showAllNook() {
+      this.nooks = this.$page.nooks.edges
+    console.log('all')
+},
+ 
+    
+    showNookByType(val) {
+      
+      this.nooks = this.$page.nooks.edges.filter((edge) => {
+          if (val == 1 && edge.node.Categories == "Public Nooks") {
+            return true
+          }
+          if (val == 2 && edge.node.Categories == "Private Nooks") {
+            return true
+          } 
+          return false
       })
-      console.log('type')
+      
       }
     }
 }

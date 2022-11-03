@@ -10,9 +10,9 @@ module.exports = function (api) {
   api.loadSource(async actions => {
     const collection = actions.addCollection('Nook')
     
-    const { data } = await axios.get(`http://localhost:1337/api/Nooks`)
+    //const { data } = await axios.get(`http://localhost:1337/api/Nooks`)
 
-    
+    const { data } = await axios.get(`http://localhost:1337/api/nooks/?populate=*`) 
 
     
 
@@ -24,6 +24,13 @@ module.exports = function (api) {
       // console.log (value)
       console.log(value),
       console.log ((value["attributes"])["Name"])
+      ctgrs = value["attributes"]["categories"]["data"]
+
+      console.log("print catgr ##########")
+      
+      console.log(ctgrs[0]["attributes"]["Name"])
+     
+      console.log("print catgr done##########")
       collection.addNode({
         
   
@@ -32,7 +39,7 @@ module.exports = function (api) {
         Name: (value["attributes"])["Name"],
         
         Description: (value["attributes"])["Description"],
-        Category:(value["attributes"])["Category"] 
+        Categories:ctgrs[0]["attributes"]["Name"] 
       })
     //}
   }
@@ -42,7 +49,7 @@ module.exports = function (api) {
       id: ID!,
       Name: String,
       Description: String, 
-      Category:String
+     Categories: String
     }
    
 `)
