@@ -8,7 +8,9 @@ const axios = require('axios')
 
 module.exports = function (api) {
   api.loadSource(async actions => {
-    const collection = actions.addCollection('Nook')
+    const collection = actions.addCollection({
+      typeName:'Nook',
+      path: '/nooks/:id'})
     
     //const { data } = await axios.get(`http://localhost:1337/api/Nooks`)
 
@@ -39,7 +41,8 @@ module.exports = function (api) {
         Name: (value["attributes"])["Name"],
         
         Description: (value["attributes"])["Description"],
-        Categories:ctgrs[0]["attributes"]["Name"] 
+        Categories:ctgrs[0]["attributes"]["Name"],
+        path: /nooks/ +value.id 
       })
     //}
   }

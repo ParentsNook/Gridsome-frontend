@@ -6,6 +6,10 @@
 
 module.exports = {
   siteName: 'Nooks',
-  siteDescription: 'Post or find Nooks around you'
+  siteDescription: 'Post or find Nooks around you',
+
+  templates: {
+    Nook: '/nooks/:id',
+  }
   //plugins: []
 }

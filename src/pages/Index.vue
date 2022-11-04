@@ -33,6 +33,7 @@ v-for= "edge in nooks" :key = "edge.node.id"
 
     <v-card-actions>
       <v-btn
+      @click="$router.push(`/nooks/${edge.node.id}`)"
         color="orange"
         text
       >
@@ -57,7 +58,8 @@ query{
         id,
         Name,
         Description,
-        Categories
+        Categories,
+        
       
         
         
